@@ -7,9 +7,11 @@ use App\Http\Requests\UpdateBuildRequest;
 use App\Repositories\BuildRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\Build;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\App;
 
 class BuildController extends AppBaseController
 {
@@ -48,21 +50,23 @@ class BuildController extends AppBaseController
 
     /**
      * Store a newly created Build in storage.
-     *
+     
      * @param CreateBuildRequest $request
      *
      * @return Response
      */
     public function store(CreateBuildRequest $request)
     {
-        $input = $request->all();
+        $input = $request->except('config_file');
+        $config_file = $request->file('config_file');
+        dd($config_file);
 
         $build = $this->buildRepository->create($input);
 
         Flash::success('Build saved successfully.');
 
         return redirect(route('builds.index'));
-    }
+   }
 
     /**
      * Display the specified Build.

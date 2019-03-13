@@ -35,7 +35,8 @@ class App extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'build_id' => 'integer'
     ];
 
     /**
@@ -46,6 +47,14 @@ class App extends Model
     public static $rules = [
         
     ];
+
+    /**
+     * Get the builds for the app.
+     */
+    public function build()
+    {
+        return $this->hasMany('App\Models\Build');
+    }
 
     
 }

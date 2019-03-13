@@ -2,7 +2,8 @@
     <thead>
         <tr>
             <th>Name</th>
-        <th>Description</th>
+            <th>Description</th>
+            <th>Build Id</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -11,6 +12,7 @@
         <tr>
             <td>{!! $app->name !!}</td>
             <td>{!! $app->description !!}</td>
+            <td>{!! $app->build_id !!}</td>
             <td>
                 {!! Form::open(['route' => ['apps.destroy', $app->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

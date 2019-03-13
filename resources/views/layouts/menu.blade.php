@@ -1,21 +1,21 @@
 
-<li class="{{ Request::is('transactions*') ? 'active' : '' }}">
+<li class="{{ Request::is('builds*') ? 'active' : '' }}">
     <a href="{!! route('builds.index') !!}"><i class="fa fa-edit"></i><span>Builds</span></a>
 </li>
 
-<li class="{{ Request::is('qrcodes*') ? 'active' : '' }}">
+<li class="{{ Request::is('apps*') ? 'active' : '' }}">
     <a href="{!! route('apps.index') !!}"><i class="fa fa-edit"></i><span>Apps</span></a>
 </li>
 
-<li class="{{ Request::is('transactions*') ? 'active' : '' }}">
+<li class="{{ Request::is('groups*') ? 'active' : '' }}">
     <a href="{!! route('groups.index') !!}"><i class="fa fa-edit"></i><span>Groups</span></a>
 </li>
 
-<li class="{{ Request::is('transactions*') ? 'active' : '' }}">
+<li class="{{ Request::is('groupAppBuilds*') ? 'active' : '' }}">
     <a href="{!! route('groupAppBuilds.index') !!}"><i class="fa fa-edit"></i><span>Groups-Apps-Builds</span></a>
 </li>
 
-<li class="{{ Request::is('transactions*') ? 'active' : '' }}">
+<li class="{{ Request::is('tags*') ? 'active' : '' }}">
     <a href="{!! route('tags.index') !!}"><i class="fa fa-edit"></i><span>Tags</span></a>
 </li>
 
@@ -23,15 +23,15 @@
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
 </li>
 
-<li class="{{ Request::is('users*') ? 'active' : '' }}">
+<li class="{{ Request::is('userDetails*') ? 'active' : '' }}">
     <a href="{!! route('userDetails.index') !!}"><i class="fa fa-edit"></i><span>User Details</span></a>
 </li>
 
-<li class="{{ Request::is('users*') ? 'active' : '' }}">
+<li class="{{ Request::is('userSeats*') ? 'active' : '' }}">
     <a href="{!! route('userSeats.index') !!}"><i class="fa fa-edit"></i><span>User Seats</span></a>
 </li>
 
-<li class="{{ Request::is('users*') ? 'active' : '' }}">
+<li class="{{ Request::is('userSubscriptions*') ? 'active' : '' }}">
     <a href="{!! route('userSubscriptions.index') !!}"><i class="fa fa-edit"></i><span>User Subscriptions</span></a>
 </li>
 

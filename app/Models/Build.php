@@ -47,5 +47,10 @@ class Build extends Model
         
     ];
 
+    public function app()
+    {
+        return $this->belongsTo('App\Models\App');
+    }
+
     
 }

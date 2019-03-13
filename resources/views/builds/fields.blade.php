@@ -7,7 +7,7 @@
 <!-- Config File Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('config_file', 'Config File:') !!}
-    {!! Form::number('config_file', null, ['class' => 'form-control']) !!}
+    {!! Form::file('config_file', ['class' => 'form-control' , 'files' => true]) !!}
 </div>
 
 <!-- Submit Field -->

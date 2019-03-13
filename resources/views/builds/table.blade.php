@@ -2,7 +2,8 @@
     <thead>
         <tr>
             <th>Name</th>
-        <th>Config File</th>
+            <th>Config File</th>
+            <th>Created At</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -11,6 +12,7 @@
         <tr>
             <td>{!! $build->name !!}</td>
             <td>{!! $build->config_file !!}</td>
+            <td>{!! $build->created_at->format('D d M. Y') !!}</td>
             <td>
                 {!! Form::open(['route' => ['builds.destroy', $build->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

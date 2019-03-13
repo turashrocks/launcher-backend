@@ -7,9 +7,11 @@ use App\Http\Requests\UpdateAppRequest;
 use App\Repositories\AppRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\App;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Build;
 
 class AppController extends AppBaseController
 {
@@ -41,9 +43,15 @@ class AppController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('apps.create');
+        $this->appRepository->pushCriteria(new RequestCriteria($request));
+        $app = $this->appRepository->all();
+
+        $builds=Build::all();
+        return view('apps.create')
+        ->with('app', $app)
+        ->with('builds', $builds);
     }
 
     /**
@@ -56,10 +64,18 @@ class AppController extends AppBaseController
     public function store(CreateAppRequest $request)
     {
         $input = $request->all();
+        $build=Build::all();
 
         $app = $this->appRepository->create($input);
+        //dd($request ->checked);
 
-        Flash::success('App saved successfully.');
+        $app = new App;
+        $app->name = $request->name;
+        $app->description = $request->description;
+        $app->$build['id'] = $request->build_id;
+        $app->$build['id'] = implode(",",$request->checked);
+        $app->save();
+        //Flash::success('App saved successfully.');
 
         return redirect(route('apps.index'));
     }
@@ -101,7 +117,11 @@ class AppController extends AppBaseController
             return redirect(route('apps.index'));
         }
 
-        return view('apps.edit')->with('app', $app);
+        $builds=Build::all();
+
+        return view('apps.edit')
+        ->with('app', $app)
+        ->with('builds', $builds);
     }
 
     /**

@@ -16,7 +16,7 @@ class CreateBuildsTable extends Migration
         Schema::create('builds', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->mediumInteger('config_file');
+            $table->mediumText('config_file')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
