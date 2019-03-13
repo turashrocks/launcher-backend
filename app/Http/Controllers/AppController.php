@@ -32,10 +32,14 @@ class AppController extends AppBaseController
     public function index(Request $request)
     {
         $this->appRepository->pushCriteria(new RequestCriteria($request));
-        $apps = $this->appRepository->all();
+        // $apps = $this->appRepository->all();
+        $apps = Build::join('apps','builds.id','=','apps.build_id')->select('apps.name as app_name','apps.description as app_description','builds.name as build_name')->get();
+
+
+         $builds = Build::all();
 
         return view('apps.index')
-            ->with('apps', $apps);
+            ->with('apps', $apps)->with('builds',$builds);
     }
 
     /**
@@ -64,13 +68,21 @@ class AppController extends AppBaseController
     public function store(CreateAppRequest $request)
     {
         $input = $request->all();
-        $build=Build::all();
+       // $build=Build::all();
 
-        $app = $this->appRepository->create($input);
+       // $app = $this->appRepository->create($input);
         //dd($request ->checked);
+       
+        foreach ($input['checked'] as $checked)
+        {
 
-        foreach () 
-        $data =array('name'=>$input['name'],'description'=>$input['description'],'build_id'=>$checked)
+             $data =array('name'=>$input['name'],'description'=>$input['description'],'build_id'=>$checked);
+
+               App::insert($data);
+        } 
+
+
+        
 
 
        //  $app = new App;
@@ -82,7 +94,7 @@ class AppController extends AppBaseController
        //  $app->save();
        //  //Flash::success('App saved successfully.');
 
-        return redirect(route('apps.index'));
+        return redirect(route('apps.index'))->with('builds', $builds);;
     }
 
     /**
@@ -101,8 +113,9 @@ class AppController extends AppBaseController
 
             return redirect(route('apps.index'));
         }
+        $builds = Build::all();
 
-        return view('apps.show')->with('app', $app);
+        return view('apps.show')->with('app', $app)->with('builds',$builds);
     }
 
     /**

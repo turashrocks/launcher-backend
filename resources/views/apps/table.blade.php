@@ -10,9 +10,10 @@
     <tbody>
     @foreach($apps as $app)
         <tr>
-            <td>{!! $app->name !!}</td>
-            <td>{!! $app->description !!}</td>
-            <td>{!! $app->build_id !!}</td>
+            <td>{!! $app->app_name !!}</td>
+            <td>{!! $app->app_description !!}</td>
+            <td>{!! $app->build_name !!}</td>
+           
             <td>
                 {!! Form::open(['route' => ['apps.destroy', $app->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
