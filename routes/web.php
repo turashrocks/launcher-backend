@@ -43,3 +43,10 @@ Route::resource('builds', 'BuildController');
 Route::resource('apps', 'AppController');
 
 Route::resource('groupAppBuilds', 'Group_App_BuildController');
+
+
+
+////custom 
+
+
+Route::post('addbuilds','BuildController@addBuilds');

@@ -69,13 +69,18 @@ class AppController extends AppBaseController
         $app = $this->appRepository->create($input);
         //dd($request ->checked);
 
-        $app = new App;
-        $app->name = $request->name;
-        $app->description = $request->description;
-        $app->$build['id'] = $request->build_id;
-        $app->$build['id'] = implode(",",$request->checked);
-        $app->save();
-        //Flash::success('App saved successfully.');
+        foreach () 
+        $data =array('name'=>$input['name'],'description'=>$input['description'],'build_id'=>$checked)
+
+
+       //  $app = new App;
+       //  $app->name = $request->name;
+       //  $app->description = $request->description;
+       //  $app->build_id = $input['checked'];
+
+       // // $app->$build['id'] = implode(",",$request->checked);
+       //  $app->save();
+       //  //Flash::success('App saved successfully.');
 
         return redirect(route('apps.index'));
     }

@@ -12,7 +12,8 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\App;
-
+use File;
+use Carbon;
 class BuildController extends AppBaseController
 {
     /** @var  BuildRepository */
@@ -57,9 +58,8 @@ class BuildController extends AppBaseController
      */
     public function store(CreateBuildRequest $request)
     {
-        $input = $request->except('config_file');
-        $config_file = $request->file('config_file');
-        dd($config_file);
+        $input = $request->all();
+
 
         $build = $this->buildRepository->create($input);
 
@@ -155,5 +155,31 @@ class BuildController extends AppBaseController
         Flash::success('Build deleted successfully.');
 
         return redirect(route('builds.index'));
+    }
+
+    public function addBuilds(Request $request)
+    {
+        $data = $request->except('_token','config_file');
+        $data['created_at'] = Carbon\Carbon::now()->toDateTimeString();
+        $config_file = $request->file('config_file');
+        $config_file_ext = $config_file->getClientOriginalExtension();
+        $config_file_name = rand(100,99999).time().".".$config_file_ext;
+        $data['config_file'] = $config_file_name;
+        $status = Build::insert($data);
+        $path = public_path()."/uploads";
+    
+        if($status)
+        {
+            $config_file->move($path,$config_file_name);
+            Flash::success('Build deleted successfully.');
+
+            return redirect(route('builds.index'));
+        }
+        else
+        {
+
+        }
+    
+
     }
 }
