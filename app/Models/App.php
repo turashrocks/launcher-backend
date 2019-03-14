@@ -49,11 +49,20 @@ class App extends Model
     ];
 
     /**
-     * Get the builds for the app.
+     * One App can have multiple Builds.
      */
     public function build()
     {
         return $this->hasMany('App\Models\Build');
+    }
+
+    /**
+     * One App belongs to only on Groups.
+     */
+
+    public function group()
+    {
+        return $this->belongsTo('App\Models\Group');
     }
 
     

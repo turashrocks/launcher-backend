@@ -68,7 +68,7 @@ class AppController extends AppBaseController
     public function store(CreateAppRequest $request)
     {
         $input = $request->all();
-       // $build=Build::all();
+        $builds=Build::all();
 
        // $app = $this->appRepository->create($input);
         //dd($request ->checked);
@@ -81,10 +81,6 @@ class AppController extends AppBaseController
                App::insert($data);
         } 
 
-
-        
-
-
        //  $app = new App;
        //  $app->name = $request->name;
        //  $app->description = $request->description;
@@ -94,7 +90,7 @@ class AppController extends AppBaseController
        //  $app->save();
        //  //Flash::success('App saved successfully.');
 
-        return redirect(route('apps.index'))->with('builds', $builds);;
+        return redirect(route('apps.index'))->with('builds', $builds);
     }
 
     /**

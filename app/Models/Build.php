@@ -47,6 +47,10 @@ class Build extends Model
         
     ];
 
+    /**
+     * One Build belongs to only on App.
+     */
+
     public function app()
     {
         return $this->belongsTo('App\Models\App');

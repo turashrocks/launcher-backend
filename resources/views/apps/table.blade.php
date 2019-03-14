@@ -3,7 +3,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Build Id</th>
+            <th>Build Name</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

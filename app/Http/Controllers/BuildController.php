@@ -152,7 +152,7 @@ class BuildController extends AppBaseController
 
         $this->buildRepository->delete($id);
 
-        Flash::success('Build deleted successfully.');
+        Flash::success('Build saved successfully.');
 
         return redirect(route('builds.index'));
     }
@@ -171,14 +171,13 @@ class BuildController extends AppBaseController
         if($status)
         {
             $config_file->move($path,$config_file_name);
-            Flash::success('Build deleted successfully.');
-
-            return redirect(route('builds.index'));
+            Flash::success('Build saved successfully.');
         }
         else
         {
-
+            Flash::error('There was an error');
         }
+        return redirect(route('builds.index'));
     
 
     }

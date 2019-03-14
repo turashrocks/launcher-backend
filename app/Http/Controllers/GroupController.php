@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\App;
 
 class GroupController extends AppBaseController
 {
@@ -43,7 +44,10 @@ class GroupController extends AppBaseController
      */
     public function create()
     {
-        return view('groups.create');
+        $apps = App::all();
+
+        return view('groups.create')->with('apps',$apps);
+        
     }
 
     /**
@@ -57,11 +61,21 @@ class GroupController extends AppBaseController
     {
         $input = $request->all();
 
+        $apps=App::all();
+
         $group = $this->groupRepository->create($input);
+
+        foreach ($input['checked'] as $checked)
+        {
+
+             $data =array('name'=>$input['name'],'build_id'=>$checked);
+
+               App::insert($data);
+        } 
 
         Flash::success('Group saved successfully.');
 
-        return redirect(route('groups.index'));
+        return redirect(route('groups.index'))->with('apps', $apps);
     }
 
     /**
@@ -81,7 +95,9 @@ class GroupController extends AppBaseController
             return redirect(route('groups.index'));
         }
 
-        return view('groups.show')->with('group', $group);
+        $apps = App::all();
+
+        return view('groups.show')->with('group', $group)->with('apps',$apps);
     }
 
     /**

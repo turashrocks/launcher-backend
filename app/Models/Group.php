@@ -46,6 +46,14 @@ class Group extends Model
     public static $rules = [
         
     ];
+    
 
+    /**
+     * One Group can have multiple Apps.
+     */
+    public function app()
+    {
+        return $this->hasMany('App\Models\App');
+    }
     
 }
